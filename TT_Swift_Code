@@ -1,0 +1,74 @@
+//
+//  ContentView.swift
+//  TallyTracker
+//
+//  Created by PaperFloppyDisk on 04.04.24.
+//  
+//
+
+import SwiftUI
+
+enum CounterButton: String {
+    case add = "+"
+    case subtract = "-"
+    case clear = "C"
+}
+
+enum Operation {
+    case add, subtract, none
+}
+
+struct ContentView: View {
+    
+    @State var value = 0
+    @State var currentOperation: Operation = .none
+    
+    let buttons: [[CounterButton]] = [
+        [.subtract, .clear, .add]
+    ]
+    
+    var body: some View {
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            
+            VStack {
+                //Text
+                Text(value.description)
+                    .bold()
+                    .font(.system(size: 100))
+                    .foregroundColor(.white)
+                
+                // Buttons
+                ForEach(buttons, id: \.self) {row in
+                    HStack {
+                        ForEach(row, id: \.self) {item in
+                            Button(action: {
+                                self.didTap(button: item)
+                            }, label: {
+                                Text(item.rawValue)
+                                    .font(.system(size: 36))
+                                    .frame(width: 72 , height:72)
+                                    .background(Color.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(36)
+                            })
+                        }
+                    }
+                }
+            }
+        }
+        .padding()
+    }
+    // Reduced overall code base to optimize
+    func didTap(button: CounterButton) {
+        switch button {
+            case .add: self.value += 1
+            case .subtract: self.value -= 1
+            case .clear: self.value = 0
+        }
+    }
+}
+
+#Preview {
+    ContentView()
+}
