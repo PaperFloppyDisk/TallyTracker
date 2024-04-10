@@ -29,7 +29,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            Color.black.edgesIgnoringSafeArea(.all)
             
             VStack {
                 //Text
@@ -72,3 +72,8 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
+
+
+
+
